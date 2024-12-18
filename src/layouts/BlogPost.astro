@@ -1,0 +1,79 @@
+import type { CollectionEntry } from 'astro:content';
+import Layout from './Layout.astro';
+import BlogAuthor from '../components/blog/BlogAuthor.astro';
+import BlogTags from '../components/blog/BlogTags.astro';
+import BlogShare from '../components/blog/BlogShare.astro';
+import TableOfContents from '../components/blog/TableOfContents.astro';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, updatedDate, author, authorImage, image, category, tags } = post.data;
+const { Content, headings } = await post.render();
+
+const formattedPubDate = new Date(pubDate).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+
+const formattedUpdatedDate = updatedDate?.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<BaseLayout 
+  title={title}
+  description={description}
+  image={image}
+  type="article"
+  publishDate={pubDate}
+>
+  <article class="max-w-4xl mx-auto">
+    <!-- Article Header -->
+    <header class="mb-8">
+      <div class="space-y-1 border-b border-mocha-200 dark:border-mocha-800 pb-6">
+        <p class="text-mocha-500 dark:text-mocha-400">
+          {category}
+        </p>
+        <h1 class="text-4xl font-bold tracking-tight text-mocha-800 dark:text-mocha-100 sm:text-5xl">
+          {title}
+        </h1>
+        <p class="text-xl text-mocha-600 dark:text-mocha-300">
+          {description}
+        </p>
+      </div>
+
+      <div class="mt-6 flex items-center justify-between">
+        <BlogAuthor author={author} image={authorImage} date={formattedPubDate} />
+        <BlogShare title={title} />
+      </div>
+    </header>
+
+    <!-- Table of Contents -->
+    {headings.length > 0 && (
+      <aside class="lg:float-right lg:ml-8 lg:w-72 mb-8 sticky top-24">
+        <TableOfContents headings={headings} />
+      </aside>
+    )}
+
+    <!-- Article Content -->
+    <div class="prose prose-mocha dark:prose-invert max-w-none">
+      <Content />
+    </div>
+
+    <!-- Article Footer -->
+    <footer class="mt-12 border-t border-mocha-200 dark:border-mocha-800 pt-6">
+      {updatedDate && (
+        <p class="text-sm text-mocha-500 dark:text-mocha-400 mb-4">
+          Last updated on {formattedUpdatedDate}
+        </p>
+      )}
+      <BlogTags tags={tags} />
+    </footer>
+  </article>
+</BaseLayout>

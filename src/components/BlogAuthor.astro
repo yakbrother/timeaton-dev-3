@@ -1,0 +1,29 @@
+---
+interface Props {
+  author: string;
+  image?: string;
+  date: string;
+}
+
+const { author, image, date } = Astro.props;
+---
+
+<div class="flex items-center space-x-3">
+  {image ? (
+    <img 
+      src={image} 
+      alt={author}
+      class="w-10 h-10 rounded-full"
+    />
+  ) : (
+    <div class="w-10 h-10 rounded-full bg-mocha-200 dark:bg-mocha-700 flex items-center justify-center">
+      <span class="text-lg font-medium text-mocha-600 dark:text-mocha-300">
+        {author[0]}
+      </span>
+    </div>
+  )}
+  <div>
+    <p class="text-sm font-medium text-mocha-800 dark:text-mocha-100">{author}</p>
+    <p class="text-sm text-mocha-500 dark:text-mocha-400">{date}</p>
+  </div>
+</div>

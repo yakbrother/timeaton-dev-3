@@ -1,0 +1,43 @@
+---
+import { getCollection } from "astro:content";
+import Head from "../components/Head.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Post from "../components/Post.astro";
+import ColorScript from "../components/ColorScript.astro";
+
+import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
+
+let posts = await getCollection("posts");
+
+posts = posts.sort(
+(a, b) =>
+new Date(b.data.updated || b.data.added).valueOf() -
+new Date(a.data.updated || a.data.added).valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="en-us">
+  <Head title="{SITE_TITLE}" description="{SITE_DESCRIPTION}" />
+  <body>
+    <header />
+    <main>
+      <content>
+        <ul class="posts-list">
+          { posts.map( ({ url, data: { description, slug, title, tags, added:
+          date }, }) =>
+          <Post {description} {date} {slug} {title} {tags} />
+          ) }
+        </ul>
+      </content>
+
+      <p class="center">
+        You can also
+        <a href="https://www.timeaton.dev/rss.xml"> subscribe with RSS! </a>
+      </p>
+    </main>
+    <footer />
+    <ColorScript />
+  </body>
+</html>

@@ -1,11 +1,29 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import { Card } from '../components';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const pageTitle = "Welcome to Our Site";
+const pageDescription = "Experience our modern, responsive website with seamless dark mode support.";
 ---
+<Layout 
+  title={pageTitle}
+  description={pageDescription}
+  image="/images/home-og.jpg"
+>
+  <div class="prose prose-mocha dark:prose-invert max-w-none">
+    <h1>{pageTitle}</h1>
+    <p class="lead">{pageDescription}</p>
+  </div>
 
-<Layout>
-	<Welcome />
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+    <Card>
+      <h2 class="text-xl font-semibold mb-4">Feature One</h2>
+      <p>Description of your first feature goes here.</p>
+    </Card>
+    
+    <Card>
+      <h2 class="text-xl font-semibold mb-4">Feature Two</h2>
+      <p>Description of your second feature goes here.</p>
+    </Card>
+  </div>
 </Layout>

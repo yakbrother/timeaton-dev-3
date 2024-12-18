@@ -1,0 +1,36 @@
+--
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import BlogCard from '../../components/blog/BlogCard.astro';
+
+const posts = await getCollection('blog', ({ data }) => {
+  return import.meta.env.PROD ? !data.draft : true;
+});
+
+const sortedPosts = posts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<Layout 
+  title="Posts"
+  description="Read our latest articles and insights"
+>
+  <div>
+    <h1>Blog</h1>
+    
+    <div>
+      {sortedPosts.map(post => (
+        <BlogCard
+          title={post.data.title}
+          description={post.data.description}
+          pubDate={post.data.pubDate}
+          author={post.data.author}
+          category={post.data.category}
+          href={`/blog/${post.slug}`}
+          image={post.data.image}
+        />
+      ))}
+    </div>
+  </div>
+</Layout>
