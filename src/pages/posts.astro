@@ -8,6 +8,7 @@ import ColorScript from "../components/ColorScript.astro";
 
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 
+let tils = await getCollection("tils");
 let posts = await getCollection("posts");
 
 posts = posts.sort(
@@ -34,7 +35,7 @@ new Date(a.data.updated || a.data.added).valueOf(),
 
       <p class="center">
         You can also
-        <a href="https://www.timeaton.dev/rss.xml"> subscribe with RSS! </a>
+        <a href="https://timeaton.dev/rss.xml"> subscribe with RSS! </a>
       </p>
     </main>
     <footer />

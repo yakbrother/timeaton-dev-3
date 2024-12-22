@@ -1,23 +1,299 @@
 ---
-import HeaderLink from "./HeaderLink.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
+import ThemeSwitcher from "@components/vue/ThemeSwitcher.vue";
+
+export interface Props {
+  activeNav?: string;
+}
+
+const { activeNav } = Astro.props;
 ---
 
 <header>
-	<div class="header-section">
-		<div class="header-frame">
-			<h1>{SITE_TITLE}</h1>
-			<h2>{SITE_DESCRIPTION}</h2>
-		</div>
-	</div>
+  <div class="nav-container solway-regular">
+    <div class="top-nav-wrap">
+      <a href="/" id="home">
+        &gt;_&nbsp;Home
+      </a>
+      <nav id="nav-menu">
+        <button
+          class="hamburger-menu focus-outline"
+          aria-label="Open Menu"
+          aria-expanded="false"
+          aria-controls="menu-items"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="menu-icon"
+          >
+            <line x1="7" y1="12" x2="21" y2="12" class="line"></line>
+            <line x1="3" y1="6" x2="21" y2="6" class="line"></line>
+            <line x1="12" y1="18" x2="21" y2="18" class="line"></line>
+            <line x1="18" y1="6" x2="6" y2="18" class="close"></line>
+            <line x1="6" y1="6" x2="18" y2="18" class="close"></line>
+          </svg>
+        </button>
+        <ul id="menu-items" class="display-none sm:flex">
+          <li>
+            <a href="/posts/" class={activeNav === "posts" ? "active" : ""}>
+                Posts
+            </a>
+          </li>
+          <li>
+            <a href="/posts/" class={activeNav === "til" ? "active" : ""}>
+                TIL
+            </a>
+          </li>
+          <li>
+            <a href="/resume/" class={activeNav === "resume" ? "active" : ""}>
+              Resume
+            </a>
+          </li>
+          <li>
+            <a href="/about/" class={activeNav === "about" ? "active" : ""}>
+              About
+            </a>
+          </li>
+          
+        
+        <li>
+        <ThemeSwitcher client:load />
+        </li>
+           
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <hr />
 </header>
-<nav>
-	<HeaderLink href="/">home</HeaderLink>
-	<HeaderLink href="/posts">posts</HeaderLink>
-	<HeaderLink href="https://cassidoo.co/newsletter">etc</HeaderLink>
-</nav>
+
 <style>
-	h2 {
-		margin: 0.5em 0;
-	}
+
+  #home {
+    white-space: nowrap;
+  }
+
+  .nav-container {
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+    align-items: center; 
+    max-width: 48rem; 
+
+    @media (min-width: 640px) { 
+        flex-direction: row; 
+    }  
+  }
+  .top-nav-wrap {
+    display: flex; 
+    position: relative; 
+    padding: 1rem; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    width: 100%; 
+
+    @media (min-width: 640px) { 
+        padding-top: 2rem;
+        padding-bottom: 2rem; 
+        align-items: center; 
+    }
+  }
+  .home {
+    position: absolute; 
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem; 
+    font-size: 1.25rem;
+    line-height: 1.75rem; 
+    font-weight: 600; 
+
+    @media (min-width: 640px) { 
+        position: static; 
+        font-size: 1.5rem;
+        line-height: 2rem; 
+    }
+
+  }
+  .hamburger-menu {
+    padding: 0.5rem; 
+    align-self: flex-end; 
+
+    @media (min-width: 640px) { 
+        display: none; 
+    }
+  }
+  .hamburger-menu svg {
+    width: 1.5rem; 
+    height: 1.5rem; 
+    --transform-scale-x: 1.25;
+    --transform-scale-y: 1.25; ;
+  }
+
+  nav {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    width: 100%; 
+
+    @media (min-width: 640px) { 
+        padding-top: 0;
+        padding-bottom: 0; 
+        margin-left: 0.5rem; 
+        margin-left: 1rem; 
+        flex-directi    on: row; 
+        justify-content: flex-end; 
+    }          
+  }
+  nav ul {
+    display: grid 
+    margin-top: 1rem; 
+    grid-template-columns: repeat(2, minmax(0, 1fr)); 
+    grid-template-rows: repeat(4, minmax(0, 1fr)); 
+    column-gap: 0.5rem; 
+    row-gap: 0.5rem; 
+    width: 11rem; 
+
+    @media (min-width: 640px) { 
+        margin-top: 0; 
+        margin-left: 0; 
+        column-gap: 1.25rem; 
+        row-gap: 0; 
+        width: auto; 
+    }
+  }
+  nav ul li {
+    display: flex; 
+    grid-column: span 2 / span 2; 
+    justify-content: center; 
+    align-items: center; 
+  }
+  nav ul li a {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem; 
+    padding-left: 1rem;
+    padding-right: 1rem; 
+    width: 100%; 
+    font-weight: 500; 
+    text-align: center; 
+
+    @media (min-width: 640px) { 
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem; 
+        padding-left: 0.5rem;
+        padding-right: 0.5rem; 
+        margin-top: 0;
+        margin-bottom: 0; 
+    }
+
+    :hover {
+        // FIXME: color
+    };
+  }
+  nav ul li:nth-last-child(2) a {
+    width: auto;
+  }
+  nav ul li:nth-last-child(1),
+  nav ul li:nth-last-child(2) {
+    grid-column: span 1 / span 1;
+  }
+  nav .active {
+    text-decoration: underline; 
+    text-decoration-thickness: 2px; 
+    text-underline-offset: 4px; 
+  }
+  nav a.active svg {
+    ##FIXME: color
+  }
+
+  nav button {
+    padding: 0.25rem;
+  }
+  nav button svg {
+    width: 1.5rem; 
+    height: 1.5rem; 
+    ## FIXME color
+    :hover {
+        ## FIXME
+    };
+  }
+  #theme-btn {
+    padding: 0.75rem; 
+
+    @media (min-width: 640px) { 
+        padding: 0.25rem; 
+    }
+  }
+  #theme-btn svg {
+    --transform-scale-x: 1.25;
+    --transform-scale-y: 1.25; 
+
+    @media (min-width: 640px) { 
+        --transform-scale-x: 1;
+        --transform-scale-y: 1; 
+    }
+
+    :hover {
+        --transform-rotate: 12deg; 
+    }
+
+  }
+
+  .menu-icon line {
+    transition-property: opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms; 
+    transition-duration: 75ms; 
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); 
+  }
+  .menu-icon .close {
+    opacity: 0;
+  }
+  .menu-icon.is-active .line {
+    opacity: 0%
+  }
+  .menu-icon.is-active .close {
+    opacity: 100%;
+  }
 </style>
+
+<script>
+  function toggleNav() {
+    // Toggle menu
+    const menuBtn = document.querySelector(".hamburger-menu");
+    const menuIcon = document.querySelector(".menu-icon");
+    const menuItems = document.querySelector("#menu-items");
+
+    menuBtn?.addEventListener("click", () => {
+      const menuExpanded = menuBtn.getAttribute("aria-expanded") === "true";
+      menuIcon?.classList.toggle("is-active");
+      menuBtn.setAttribute("aria-expanded", menuExpanded ? "false" : "true");
+      menuBtn.setAttribute(
+        "aria-label",
+        menuExpanded ? "Open Menu" : "Close Menu"
+      );
+      menuItems?.classList.toggle("display-none");
+    });
+  }
+
+  toggleNav();
+
+  // Runs on view transitions navigation
+  document.addEventListener("astro:after-swap", toggleNav);
+</script>
+
+<script>
+    import ThemeSwitcher from '@components/vue/ThemeSwitcher.vue'
+
+    export default {
+        name: 'App',
+        components: {
+            ThemeSwitcher
+        }
+    }
+</script>

@@ -1,10 +1,10 @@
 ---
-import "../style/fonts.css";
-import "../style/global.css";
+import "@styles/fonts.css";
+import "@styles/main.css";
 
-import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
+import { CONFIG } from "../config";
 
-const { title, description, image = "/home-blog-card.png" } = Astro.props;
+const { title = CONFIG.site_title, description = CONFIG.description, image = "/og-default.jpg" } = Astro.props;
 ---
 
 <head>
@@ -31,7 +31,7 @@ const { title, description, image = "/home-blog-card.png" } = Astro.props;
 	<meta property="twitter:url" content={Astro.url} />
 	<meta property="twitter:title" content={title} />
 	<meta property="twitter:description" content={description} />
-	<meta name="twitter:creator" content="@cassidoo" />
+	<meta name="twitter:creator" content="@yakbrother" />
 	<meta name="twitter:image" content={new URL(image, Astro.url)} />
 
 	<!-- RSS Link -->
@@ -39,9 +39,10 @@ const { title, description, image = "/home-blog-card.png" } = Astro.props;
 		rel="alternate"
 		href="/rss.xml"
 		type="application/rss+xml"
-		title={SITE_TITLE}
+		title={CONFIG.site_title}
 	/>
 
 	<!-- Sitemap -->
 	<link rel="sitemap" href="/sitemap-index.xml" />
+	
 </head>

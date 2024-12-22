@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import TilCard from '@components/TilCard.astro';
+
+const posts = await getCollection('tils', ({ data }) => {
+  return import.meta.env.PROD ? !data.draft : true;
+});
+
+const sortedPosts = posts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout 
+  title="TIL"
+  description="Read the latest interesting things I learned on the interwebs."
+>
+  <div>
+    <h1>Today I learned...</h1>
+    
+    <div>
+      {sortedPosts.map(post => (
+        <TilCard
+          title={post.data.title}
+          link={post.data.link}
+          description={post.data.description}
+          publicationDate={post.data.pubDate}
+          author={post.data.author}
+          category={post.data.category}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>

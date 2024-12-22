@@ -3,10 +3,13 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
+      "@content/*": ["../content/*"],
       "@layouts/*": ["layouts/*"],
       "@components/*": ["components/*"],
       "@data/*": ["lib/data/*"],
-      "@helpers/*": ["lib/helpers/*"]
-    }
+      "@helpers/*": ["lib/helpers/*"],
+      "@styles/*": ["styles/*"]
+    },
+    "jsx": "preserve"
   }
 }

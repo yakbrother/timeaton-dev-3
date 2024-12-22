@@ -1,29 +1,168 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { Card } from '../components';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getCollection } from "astro:content";
 
-const pageTitle = "Welcome to Our Site";
-const pageDescription = "Experience our modern, responsive website with seamless dark mode support.";
+const posts = await getCollection("posts");
 ---
-<Layout 
-  title={pageTitle}
-  description={pageDescription}
-  image="/images/home-og.jpg"
->
-  <div class="prose prose-mocha dark:prose-invert max-w-none">
-    <h1>{pageTitle}</h1>
-    <p class="lead">{pageDescription}</p>
-  </div>
+<BaseLayout>
+  
+	<section id="hero">
+      <div id="hero-title">
+        <img src="/assets/timeaton.png" alt="Avatar for Tim Eaton">
+        <div style="font-weight: 500;">
+            <h1 class="solway-regular" style="margin:0;">Timothy Eaton</h1>
+            <div id="subtitle">He/Him | Senior Full-Stack Developer | Nyon, Switzerland</div>
+        </div>
+      </div>
+	
+      <p>
+        With over 16 years of experience as a full-stack developer, I specialize in back-end development and user experience design. I build accessible, user-friendly tools and websites using PHP (Laravel), Javascript, AWS, and various other technologies, whether I'm working from scratch or updating legacy code.
+      </p><p>
+        Recently, I've been focusing on creating websites that help reduce both carbon footprints and operating costs. To learn more about sustainable web design, check out <a href="http://sustainable.dev">sustainable.dev</a>.
+      </p><p>
+        I'm currently looking for a new job in the Geneva area. I'm also available for new projects and collaborations. Whether you need a full site or want to make your existing site more optimized, I'd love to discuss it with you. Email me to start a conversation!
+      </p>
+      
+      <ul id="action-links">
+        <li><a href="/resume">Resume</a></li>
+        <li><a href="mailto:tim@timeaton.dev">Email</a></li>
+        <li><a href="https://github.com/yakbrother">Github</a></li>
+        <li><a href="https://www.linkedin.com/in/tim-eaton-pluies/">LinkedIn</a></li>
+        <li><a href="https://bsky.app/profile/yakbrother.bsky.social">Bluesky</a></li>
+      </ul>
+      
+    </section>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-    <Card>
-      <h2 class="text-xl font-semibold mb-4">Feature One</h2>
-      <p>Description of your first feature goes here.</p>
-    </Card>
-    
-    <Card>
-      <h2 class="text-xl font-semibold mb-4">Feature Two</h2>
-      <p>Description of your second feature goes here.</p>
-    </Card>
-  </div>
-</Layout>
+    <hr />
+
+    <section id="skills">
+        <h2 class="solway-regular">Skills</h2>
+          <ul class="pill-list">
+              <li>PHP</li>
+              <li>Javascript</li>
+              <li>HTML Standards</li>
+              <li>Modern CSS</li>
+              <li>Accessibility</li>
+              <li>User Experience</li>
+              <li>Design</li>
+              <li>Sustainable Energy Use</li>
+              <li>Laravel</li>
+              <li>Vue.js</li>
+              <li>Typescript</li>
+          </ul>
+        </section>
+
+	<hr />
+
+    <div class="all-posts-btn-wrapper">
+      
+        All Posts
+        <svg xmlns="http://www.w3.org/2000/svg"
+          ><path
+            d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
+          ></path>
+        </svg>
+      
+    </div>
+
+
+<style>
+  /* ===== Hero Section ===== */
+  #hero {
+    padding-bottom: 1.5rem; 
+    padding-top: 2rem; 
+  }
+  #hero .subtitle {
+	margin: 0.5rem; 
+	font-size: 0.875rem;
+	line-height: 1.25rem; 
+  }
+  #hero-title {
+    display: flex; 
+    gap: 1rem; 
+    align-items: center;  
+  }
+  #hero h1 {
+    display: inline-block; 
+    margin: 0; 
+    font-size: 1.875rem;
+    line-height: 2.25rem; 
+    font-weight: 700; 
+
+    @media (min-width: 640px) { 
+      margin: 0; 
+      font-size: 3rem;
+      line-height: 1; 
+     }
+  }
+  #hero img {
+	border-radius: 9999px; 
+	border-width: 4px; 
+	width: 8rem; 
+	height: 8rem; 
+	border-color: var(--color-surface-mixed-a30);
+  }
+
+  #hero p {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem; 
+  }
+  
+  #action-links {
+      display: flex; 
+      margin: 0.25rem; 
+      flex-wrap: wrap; 
+	  list-style-type: none
+  }
+
+  #action-links li a {
+    display: block; 
+	padding: 0.25rem; 
+	margin-right: 0.5rem; 
+	font-weight: 700; 
+	border-color: var(--color-surface-mixed-a30);
+  }
+
+  .pill-list {
+    display: flex; 
+	margin-top: 2rem; 
+	flex-wrap: wrap; 
+	list-style-type: none
+  }
+
+  .pill-list li {
+    padding: 0.25rem; 
+	margin: 0.5rem; 
+	border-radius: 0.25rem; 
+	border-width: 1px; 
+	font-size: 0.875rem;
+	line-height: 1.25rem; 
+    border-color: var(--color-surface-mixed-a30);
+  }
+
+  /* ===== Featured & Recent Posts Sections ===== */
+  #featured,
+  #skills,
+  #cases,
+  #til,
+  #recent-posts {
+    padding-bottom: 1.5rem; 
+	padding-top: 3rem; 
+  }
+
+  #featured h2,
+  #skills h2,
+  #cases h2,
+  #til h2,
+  #recent-posts h2 {
+    font-size: 1.5rem;
+	line-height: 2rem; 
+	font-weight: 600; 
+	letter-spacing: 0.025em; 
+  }
+  .all-posts-btn-wrapper {
+    margin-top: 2rem;
+	margin-bottom: 2rem; 
+	text-align: center; 
+  }
+</style>

@@ -1,15 +1,14 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
-import icon from "astro-icon";
-import db from "@astrojs/db";
+
+import vue from "@astrojs/vue";
 
 export default defineConfig({
   site: "https://www.timeaton.dev/",
   base: "/",
-  integrations: [sitemap(), tailwind(), mdx(), icon(), db()],
+  integrations: [sitemap(), mdx(), vue()],
   markdown: {
     shikiConfig: {
       theme: "material-theme-darker",
