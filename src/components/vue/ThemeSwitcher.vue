@@ -38,18 +38,29 @@ export default {
   name: "ThemeSwitcher",
   data() {
     return {
-      darkMode: false,
+      darkMode: true,
+      mounted() {
+        const themePreference = localStorage.getItem("theme");
+
+        if (themePreference) {
+          this.darkMode = themePreference === "dark";
+        } else {
+          this.darkMode = window.matchMedia(
+            "(prefers-color-scheme: dark)",
+          ).matches;
+        }
+
+        document.documentElement.classList.toggle("dark", this.darkMode);
+      },
     };
   },
   mounted() {
     // Check initial theme
     this.darkMode = document.documentElement.classList.contains("dark");
-    console.log("Initial dark mode:", this.darkMode); // Debug log
   },
   methods: {
     toggleTheme() {
       this.darkMode = !this.darkMode;
-      console.log("Toggle clicked, dark mode:", this.darkMode); // Debug log
 
       if (this.darkMode) {
         document.documentElement.classList.add("dark");
@@ -60,9 +71,7 @@ export default {
       // Try to save preference
       try {
         localStorage.setItem("theme", this.darkMode ? "dark" : "light");
-      } catch (e) {
-        console.warn("localStorage not available");
-      }
+      } catch (e) {}
     },
   },
 };

@@ -8,9 +8,7 @@ slug: goodbye-hospital
 featured: false
 public: true
 description: Finally, I'm back home for a while!
-category:
-  - life
-  - learning
+category: life
 ---
 
 After hurting my leg, I’ve spent the last four months in the hospital with various complications after the initial surgery. It’s been a wild ride, with a lot of pain, boredom, and frustration.

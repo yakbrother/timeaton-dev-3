@@ -7,10 +7,7 @@ slug: allonz-y-basic-typography
 featured: false
 public: true
 description: A few notes on starting my first UI framework.
-category:
-  - CSS
-  - Front End
-  - UI
+category: dev
 ---
 
 Part of me appreciates Tailwind CSS. It’s easy to use, especially for layouts, but I think that “utility” approaches to CSS are a bit much sometimes. This is especially the case in rendering dynamic content - such as a blog or user-edited pages.

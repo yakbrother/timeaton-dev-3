@@ -7,10 +7,7 @@ slug: monoliths-vs-side-projects
 featured: false
 public: true
 description: Thoughts after working so long on a monolithic project
-category:
-  - backend
-  - architecture
-  - planning
+category: dev
 ---
 
 For a while, I worked for a company with a **massive** monolithic repository. Actually, by the time I left, it was two repositories; whatever remained of the original code, some of it still PHP4, from a decade ago; and a Laravel project with all the new refactoring and new features.

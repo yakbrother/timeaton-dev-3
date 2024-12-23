@@ -1,6 +1,4 @@
 ---
-import ThemeSwitcher from "@components/vue/ThemeSwitcher.vue";
-
 export interface Props {
   activeNav?: string;
 }
@@ -10,36 +8,11 @@ const { activeNav } = Astro.props;
 
 <header>
   <div class="nav-container solway-regular">
-    <div class="top-nav-wrap">
+
       <a href="/" id="home">
         &gt;_&nbsp;Home
       </a>
       <nav id="nav-menu">
-        <button
-          class="hamburger-menu focus-outline"
-          aria-label="Open Menu"
-          aria-expanded="false"
-          aria-controls="menu-items"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="menu-icon"
-          >
-            <line x1="7" y1="12" x2="21" y2="12" class="line"></line>
-            <line x1="3" y1="6" x2="21" y2="6" class="line"></line>
-            <line x1="12" y1="18" x2="21" y2="18" class="line"></line>
-            <line x1="18" y1="6" x2="6" y2="18" class="close"></line>
-            <line x1="6" y1="6" x2="18" y2="18" class="close"></line>
-          </svg>
-        </button>
         <ul id="menu-items" class="display-none sm:flex">
           <li>
             <a href="/posts/" class={activeNav === "posts" ? "active" : ""}>
@@ -47,8 +20,8 @@ const { activeNav } = Astro.props;
             </a>
           </li>
           <li>
-            <a href="/posts/" class={activeNav === "til" ? "active" : ""}>
-                TIL
+            <a href="/found/" class={activeNav === "found" ? "active" : ""}>
+                Found
             </a>
           </li>
           <li>
@@ -63,13 +36,43 @@ const { activeNav } = Astro.props;
           </li>
           
         
-        <li>
-        <ThemeSwitcher client:load />
+        <li  class="theme-switcher" id="theme-switcher-toggle">
+        
+        <div class="theme-container">
+    <button
+      :class="['theme-toggle', { 'dark-mode': darkMode }]"
+      aria-label="Toggle theme"
+    >
+      <div class="toggle-thumb">
+        <svg
+          v-if="!darkMode"
+          class="sun-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+        >
+          <circle cx="12" cy="12" r="5" />
+          <path
+            d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+          />
+        </svg>
+        <svg
+          v-else
+          class="moon-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+        >
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+        </svg>
+      </div>
+    </button>
+      
         </li>
            
         </ul>
       </nav>
-    </div>
+    
   </div>
   <hr />
 </header>
@@ -120,24 +123,11 @@ const { activeNav } = Astro.props;
     }
 
   }
-  .hamburger-menu {
-    padding: 0.5rem; 
-    align-self: flex-end; 
 
-    @media (min-width: 640px) { 
-        display: none; 
-    }
-  }
-  .hamburger-menu svg {
-    width: 1.5rem; 
-    height: 1.5rem; 
-    --transform-scale-x: 1.25;
-    --transform-scale-y: 1.25; ;
-  }
 
   nav {
     display: flex; 
-    flex-direction: column; 
+    flex-direction: row; 
     align-items: center; 
     width: 100%; 
 
@@ -146,7 +136,7 @@ const { activeNav } = Astro.props;
         padding-bottom: 0; 
         margin-left: 0.5rem; 
         margin-left: 1rem; 
-        flex-directi    on: row; 
+        flex-direction: row; 
         justify-content: flex-end; 
     }          
   }
@@ -154,9 +144,7 @@ const { activeNav } = Astro.props;
     display: grid 
     margin-top: 1rem; 
     grid-template-columns: repeat(2, minmax(0, 1fr)); 
-    grid-template-rows: repeat(4, minmax(0, 1fr)); 
     column-gap: 0.5rem; 
-    row-gap: 0.5rem; 
     width: 11rem; 
 
     @media (min-width: 640px) { 
@@ -190,10 +178,6 @@ const { activeNav } = Astro.props;
         margin-top: 0;
         margin-bottom: 0; 
     }
-
-    :hover {
-        // FIXME: color
-    };
   }
   nav ul li:nth-last-child(2) a {
     width: auto;
@@ -217,10 +201,6 @@ const { activeNav } = Astro.props;
   nav button svg {
     width: 1.5rem; 
     height: 1.5rem; 
-    ## FIXME color
-    :hover {
-        ## FIXME
-    };
   }
   #theme-btn {
     padding: 0.75rem; 
@@ -260,40 +240,98 @@ const { activeNav } = Astro.props;
   .menu-icon.is-active .close {
     opacity: 100%;
   }
+
+  
+
 </style>
 
-<script>
-  function toggleNav() {
-    // Toggle menu
-    const menuBtn = document.querySelector(".hamburger-menu");
-    const menuIcon = document.querySelector(".menu-icon");
-    const menuItems = document.querySelector("#menu-items");
+<style scoped>
+.theme-container {
+  display: inline-block;
+  padding: 10px;
+}
 
-    menuBtn?.addEventListener("click", () => {
-      const menuExpanded = menuBtn.getAttribute("aria-expanded") === "true";
-      menuIcon?.classList.toggle("is-active");
-      menuBtn.setAttribute("aria-expanded", menuExpanded ? "false" : "true");
-      menuBtn.setAttribute(
-        "aria-label",
-        menuExpanded ? "Open Menu" : "Close Menu"
-      );
-      menuItems?.classList.toggle("display-none");
-    });
+.theme-toggle {
+  position: relative;
+  width: 60px;
+  height: 30px;
+  background-color: #e5e7eb;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.3s;
+}
+
+.theme-toggle.dark-mode {
+  background-color: #4b5563;
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dark-mode .toggle-thumb {
+  transform: translateX(30px);
+  background-color: #374151;
+}
+
+.sun-icon,
+.moon-icon {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+.sun-icon {
+  color: #fbbf24;
+}
+
+.moon-icon {
+  color: #ffffff;
+}
+</style>
+
+<script is:inline>
+  // Get the current theme preference from local storage
+  const storedTheme = localStorage.getItem("theme");
+
+  // Get the user's preferred theme from the browser
+  const userPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  // Set the default theme to dark
+  let theme = "dark";
+
+  // Check if the user has a stored theme preference
+  if (storedTheme) {
+    theme = storedTheme;
+  } else if (!userPrefersDark) {
+    // If the user doesn't prefer dark mode, set the theme to light
+    theme = "light";
   }
 
-  toggleNav();
+  // Set the theme class on the document element
+  document.documentElement.classList.toggle("dark", theme === "dark");
 
-  // Runs on view transitions navigation
-  document.addEventListener("astro:after-swap", toggleNav);
-</script>
+  // Add an event listener to the theme switcher button
+  document.getElementById("theme-switcher-toggle").addEventListener("click", () => {
+    // Toggle the theme
+    theme = theme === "dark" ? "light" : "dark";
 
-<script>
-    import ThemeSwitcher from '@components/vue/ThemeSwitcher.vue'
+    // Update the theme class on the document element
+    document.documentElement.classList.toggle("dark", theme === "dark");
 
-    export default {
-        name: 'App',
-        components: {
-            ThemeSwitcher
-        }
-    }
+    // Store the new theme preference in local storage
+    localStorage.setItem("theme", theme);
+  });
 </script>

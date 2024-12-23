@@ -7,10 +7,7 @@ modifiedDate:
 slug: my-first-french-job
 featured: false
 public: true
-category:
-  - Life
-  - Teaching
-  - Dev
+category: dev
 ---
 
 After about 9 months of looking - I found a job! It wasn't what I thought I would be doing. I'm no longer a code monkey; I'm a business teacher in Rennes, France.

@@ -2,8 +2,8 @@ export const PATHS = {
   home: "/",
   about: "/about",
   resume: "/resume",
-  posts: "/posts/",
-  til: "/til",
+  posts: "/posts",
+  finds: "/finds",
   error404: "/404",
 } as const;
 

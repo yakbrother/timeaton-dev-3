@@ -7,10 +7,7 @@ slug: not-all-therapists
 featured: false
 public: true
 description: What actually do you owe your clients?
-category:
-  - career
-  - life
-  - management
+category: musings
 ---
 
 Most of my industry work was dominated by blue-collar work, long before iPhones and iPads became ubiquitous. One of our main challenges was instructing clients on how to use our tools. Sometimes, this even meant teaching them to type a URL instead of searching for us on Google every time. With only about 30-40 employees, nearly everyone had to tackle these issues, and even the simplest problems often ended up with the development team.

@@ -7,10 +7,7 @@ slug: 2024-so-far
 featured: false
 public: true
 description: (Spoilers) New Hip!
-category:
-  - Life
-  - Branding
-  - Dev
+category: life
 ---
 
 Hi folks! I’ve decided to add a blog to my site, mostly to write about my continued learning process as a programmer (and to keep myself accountable during the process). My plan is to write about my thought process as I code day-to-day, along with fun tips I find along the way.

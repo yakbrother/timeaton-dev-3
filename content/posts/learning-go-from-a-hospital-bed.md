@@ -7,10 +7,7 @@ slug: learning-go-from-a-hospital-bed
 featured: false
 public: true
 description: How I decided to start learning Go and set up a plan for the first steps.
-category:
-  - Go
-  - Code
-  - Learning
+category: dev
 ---
 
 I’ve always been fascinated by Go - mostly because I watched people work on it in co-working spaces and they always seemed to have fun with their jobs. But never learned it or used it in my work. I figured - I’m stuck in a hospital bed. Why not go for it now?

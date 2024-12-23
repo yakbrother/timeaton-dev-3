@@ -7,9 +7,7 @@ slug: job-searchin-blues
 featured: false
 public: true
 description: Ain't got no money, ain't got no job...
-category:
-  - career
-  - life
+category: musings
 ---
 
 Why is it so hard to find a job? I’ve applied for well over a hundred positions (through LinkedIn, Larajobs, Hacker News, friends, random openings, or just cold-writing to a startup CEO). I’ve gone through a number of interviews, but had very little luck.

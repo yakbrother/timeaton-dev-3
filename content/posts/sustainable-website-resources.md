@@ -7,9 +7,7 @@ slug: sustainable-website-resources
 featured: false
 public: true
 description: A few links to get you started.
-category:
-  - sustainable
-  - code
+category: dev
 ---
 
 I've recently become more interested in how much pollution the internet causes - I've known about this in general, but I've started learning to implement a few best practices in my work. Here are a few resources that have come in handy for me:

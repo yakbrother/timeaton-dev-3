@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import LinkCard from '@components/LinkCard.astro';
 import { getCollection } from "astro:content";
 
 const posts = await getCollection("posts");
+const finds = await getCollection("finds");
 ---
 <BaseLayout>
   
@@ -53,6 +55,22 @@ const posts = await getCollection("posts");
         </section>
 
 	<hr />
+
+	<section id="skills">
+        <h2 class="solway-regular">Today I Found...</h2>
+
+		{finds.map(entry => (
+			<LinkCard
+				type={entry.data.title}
+				title={entry.data.title}
+				publicationDate={entry.data.publicationDate}
+				description={entry.data.description}
+				link={entry.slug}
+			/>
+		))}
+	</section>
+
+	<hr/>
 
     <div class="all-posts-btn-wrapper">
       

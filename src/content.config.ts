@@ -10,7 +10,7 @@ export enum PostType {
   life = "life",
 }
 
-export enum TilType {
+export enum FoundType {
   video = "video",
   article = "article",
   book = "book",
@@ -18,7 +18,7 @@ export enum TilType {
 }
 
 const posts = defineCollection({
-  loader: glob({ pattern: "*.md", base: "@content/posts" }),
+  loader: glob({ pattern: "*.md", base: "./content/posts" }),
   schema: z.object({
     title: z.string(),
     slug: z.string(),
@@ -27,24 +27,24 @@ const posts = defineCollection({
     description: z.string(),
     category: z.nativeEnum(PostType),
     publicationDate: z.coerce.date(),
-    public: z.boolean(),
+    public: z.boolean().default(true),
     editDate: z.coerce.date().optional(),
   }),
 });
 
-const tils = defineCollection({
-  loader: glob({ pattern: "*.md", base: "@content/til" }),
+const finds = defineCollection({
+  loader: glob({ pattern: "*.md", base: "./content/finds" }),
   schema: z.object({
     title: z.string(),
     link: z.string(),
     description: z.string(),
-    category: z.nativeEnum(TilType),
+    type: z.nativeEnum(FoundType),
     publicationDate: z.coerce.date(),
-    public: z.boolean(),
+    public: z.boolean().default(true),
   }),
 });
 
 export const collections = {
   posts,
-  tils,
+  finds,
 };

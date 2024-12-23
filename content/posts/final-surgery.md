@@ -7,9 +7,7 @@ slug: final-surgery
 featured: false
 public: true
 description: "I finally got my new hip!"
-category:
-  - career
-  - life
+category: musings
 ---
 
 After the complications of my last surgery, I approached this next attempt with a mix of anxiety and hope, uncertain if it would succeed or if I'd have to endure another wait.
